@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-# from geopy.distance import geodesic
+from geopy.distance import geodesic
 import geocoder
 import folium
 from streamlit_folium import folium_static
@@ -68,8 +68,8 @@ if uploaded_file is not None:
             plant_latitude, plant_longitude = row['Latitude'], row['Longitude']
             
             # Distance between user and nuclear power plant in km
-            distance = 1000
-             # distance = geodesic((user_latitude, user_longitude), (plant_latitude, plant_longitude)).km
+           
+             distance = geodesic((user_latitude, user_longitude), (plant_latitude, plant_longitude)).km
             
             # Distance in km for alerting the user
             threshold_distance = 500
