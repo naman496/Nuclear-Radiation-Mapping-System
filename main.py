@@ -10,20 +10,20 @@ user_latitude, user_longitude = None, None
 
 st.title('Nuclear Power Plant Analysis')
 
-# Upload their dataset
+# Uploading dataset
 uploaded_file = st.file_uploader("Upload your dataset (CSV)", type=["csv"])
 
 if uploaded_file is not None:
     df = pd.read_csv(uploaded_file)
 
-    # Display the dataset
+    # Displaying dataset
     st.write("Uploaded Dataset:")
     st.write(df)
 
-    # Handle missing values by filling them with 0
+    # Handling missing values by filling them with 0
     df.fillna(0, inplace=True)
 
-    # Calculate 'Safety' column based on 'Age' column
+    # Calculating 'Safety' column based on 'Age' column
     def calculate_safety(age):
         if pd.isna(age):
             return 'Unknown'
@@ -46,14 +46,14 @@ if uploaded_file is not None:
         except AttributeError:
             user_latitude, user_longitude = None, None
 
-    # Update user's location
+    # Updating user's location
     update_user_location()
 
-    # Create map
+    # Creating map
     st.subheader('Geographical Data Map')
     map = folium.Map(location=[user_latitude or 0, user_longitude or 0], zoom_start=10)
 
-    # Define colors for radius circles based on safety levels
+    # Defining colors for radius circles based on safety levels
     colors = {
         'Safe': 'green',
         'Dangerous': 'purple',
